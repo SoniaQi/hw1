@@ -207,10 +207,8 @@ TEST(ListInsert, BackThenFront)
 
 TEST(ListInsertBack, ARRSIZEPlusOne)
 {
-	std::vector<std::string> contents = makeRandomAlphaStringVector(ARRSIZE + 1, 574, 16, false);
-
-	ULListStr * populatedList = makeList(contents);
-
+	std::vector<std::string> contents = makeRandomAlphaStringVector(ARRSIZE + 1, 574, 16, false); 
+	ULListStr * populatedList = makeList(contents); 
 	EXPECT_TRUE(checkListContent(populatedList, contents));
 
 	delete populatedList;
@@ -433,30 +431,25 @@ TEST(ListRemove, SongOfBackAndFront)
 
 	list.push_back("oldfront");
 	list.push_back("oldback");
-
+  
 	EXPECT_TRUE(checkListContent(&list, {"oldfront", "oldback"}));
-
+  
 	// this should create an empty slot at the front of the list, and the new element can be put there
 	list.pop_front();
 	list.push_front("newfront");
-
 	EXPECT_TRUE(checkListContent(&list, {"newfront", "oldback"}));
-
 	// now, a new element struct should get created at the front
 	list.pop_back();
 	list.push_front("cloudfront");
 
 	EXPECT_TRUE(checkListContent(&list, {"cloudfront", "newfront"}));
-
 	// now, the original head should get deleted
 	list.pop_back();
 
 	EXPECT_TRUE(checkListContent(&list, {"cloudfront"}));
-
 	list.pop_front();
 
 	EXPECT_TRUE(checkListContent(&list, {}));
-
 	list.push_front("newback");
 
 	EXPECT_TRUE(checkListContent(&list, {"newback"}));
@@ -467,18 +460,16 @@ TEST(ListRemove, 50ElementsFromBack)
 {
 	const size_t numElements = 50;
 	const Seed origSeed = 18;
-
+  
 	std::vector<std::string> contents(makeRandomAlphaStringVector(numElements, origSeed, 12, true));
-
 	ULListStr * list = makeList(contents);
-
 	for(int index = static_cast<int>(contents.size() - 1); index >= 0; --index)
 	{
 		list->pop_back();
 		contents.erase(contents.begin() + index);
 		EXPECT_TRUE(checkListContent(list, contents));
 	}
-
+  
 	delete list;
 }
 
