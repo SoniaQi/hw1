@@ -19,21 +19,29 @@ void split(Node*& in, Node*& odds, Node*& evens)
 {
   /* Add code here */
 // WRITE YOUR CODE HERE
+
+// check if the last node is reached
 if (in != NULL) {
+  // create a copy of current node and call recurse w/o the current node
   Node* temp = in;
   in = temp->next;
   split(in, odds, evens);
+  // check if the val of current node is odd or even
   if (temp->value % 2 == 1) {
+    // add val to the front of the odd list
     Node* newN = new Node(temp->value, odds);
     odds = newN;
   }
   else {
+    // add val to the front of the even list
     Node* newN = new Node(temp->value, evens);
     evens = newN;
 }
+  // delete the copy after using it
   delete temp;
 }
 else {
+  // delete the entire in once all vals have been added
   delete in;
 }
 }
